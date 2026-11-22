@@ -5,6 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 flutter create . --org ci.recufacile --project-name recufacile_ci --platforms=android,ios >/dev/null
+rm -f test/widget_test.dart   # test d'exemple généré par flutter create
 flutter pub get
 
 MANIFEST=android/app/src/main/AndroidManifest.xml

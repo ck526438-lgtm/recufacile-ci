@@ -161,10 +161,9 @@ class _ReceiptScreenState extends State<ReceiptScreen> {
                         size: 56,
                         tooltip: 'Enregistrer sur le téléphone',
                         onTap: () => _run(() async {
+                          final messenger = ScaffoldMessenger.of(context);
                           final File f = await PdfService.saveToDevice(r, m);
-                          if (mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('PDF enregistré : ${f.uri.pathSegments.last}')));
-                          }
+                          messenger.showSnackBar(SnackBar(content: Text('PDF enregistré : ${f.uri.pathSegments.last}')));
                         }),
                       ),
                       const SizedBox(width: 10),
