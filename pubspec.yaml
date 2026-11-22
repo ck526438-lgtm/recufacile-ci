@@ -1,0 +1,46 @@
+name: recufacile_ci
+description: "ReçuFacile CI — reçus numériques gratuits pour commerçants, hors ligne, sans abonnement."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  provider: ^6.1.2
+  sqflite: ^2.3.3
+  path: ^1.9.0
+  path_provider: ^2.1.4
+  shared_preferences: ^2.3.2
+  intl: any
+  pdf: ^3.11.1
+  printing: ^5.13.4
+  share_plus: ^10.1.4
+  image_picker: ^1.1.2
+  local_auth: ^2.3.0
+  crypto: ^3.0.5
+  barcode_widget: ^2.0.4
+  file_picker: ^8.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  sqflite_common_ffi: ^2.3.4
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#1D4ED8"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icon/icon.png
