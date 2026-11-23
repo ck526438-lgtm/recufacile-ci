@@ -38,9 +38,22 @@ jobs:
             echo "::warning::Secrets de signature absents : APK signé avec une clé de debug temporaire (les mises à jour ne s'installeront pas par-dessus)."
             exit 0
           fi
+          # Tolère les erreurs de copier-coller : « NOM=valeur », espaces, retours à la ligne.
+          clean() { printf '%s' "$1" | tr -d '\r\n' | sed -E 's/^[[:space:]]*[A-Z_]+=//; s/^[[:space:]]+//; s/[[:space:]]+$//'; }
+          STORE_PASS=$(clean "$KEYSTORE_PASSWORD")
+          KEY_PASS=$(clean "$KEY_PASSWORD")
+          ALIAS=$(clean "$KEY_ALIAS")
+          [ -z "$ALIAS" ] && ALIAS=recufacile
+          [ -z "$KEY_PASS" ] && KEY_PASS="$STORE_PASS"
           mkdir -p android/app
-          echo "$KEYSTORE_BASE64" | base64 -d > android/app/upload.jks
-          printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=upload.jks\n' "$KEYSTORE_PASSWORD" "$KEY_PASSWORD" "$KEY_ALIAS" > android/key.properties
+          printf '%s' "$KEYSTORE_BASE64" | sed -E 's/^[[:space:]]*KEYSTORE_BASE64=//' | tr -d ' \r\n\t' | base64 -d > android/app/upload.jks || {
+            echo "::error::KEYSTORE_BASE64 n'est pas un base64 valide : recopiez tout le contenu de KEYSTORE_BASE64.txt."; exit 1; }
+          if ! keytool -list -keystore android/app/upload.jks -storepass "$STORE_PASS" -alias "$ALIAS" >/dev/null 2>&1; then
+            echo "::error::Clé de signature illisible : vérifiez KEYSTORE_PASSWORD (uniquement le mot de passe, sans 'KEYSTORE_PASSWORD='), KEY_ALIAS (recufacile) et que KEYSTORE_BASE64 est complet ($(stat -c%s android/app/upload.jks) octets décodés)."
+            exit 1
+          fi
+          echo "✓ Clé de signature valide (alias $ALIAS)"
+          printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=upload.jks\n' "$STORE_PASS" "$KEY_PASS" "$ALIAS" > android/key.properties
 
       - name: Générer les plateformes natives
         run: bash tool/setup_platforms.sh

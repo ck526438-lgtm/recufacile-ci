@@ -1,5 +1,11 @@
 # Journal des versions
 
+## 1.1.1
+- APK signé avec la clé définitive : les futures mises à jour s'installent par-dessus.
+- Support WhatsApp (07 87 25 60 74) dans « Aide & avis ».
+
+> Désinstallez une dernière fois l'ancienne version avant d'installer la 1.1.1.
+
 ## 1.1.0 — Prêt pour les premiers utilisateurs
 - Page de téléchargement et politique de confidentialité (GitHub Pages).
 - Nouvel écran **Aide & avis** : guide rapide, avis envoyés directement sur WhatsApp, recommander l'app.

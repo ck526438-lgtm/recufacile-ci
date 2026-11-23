@@ -1,7 +1,7 @@
 /// Configuration publique de l'application.
 class AppConfig {
   /// Doit correspondre à `version:` dans pubspec.yaml (vérifié par les tests).
-  static const version = '1.1.0';
+  static const version = '1.1.1';
 
   static const repo = 'ck526438-lgtm/recufacile-ci';
   static const website = 'https://ck526438-lgtm.github.io/recufacile-ci/';
