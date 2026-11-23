@@ -48,8 +48,17 @@ jobs:
           mkdir -p android/app
           printf '%s' "$KEYSTORE_BASE64" | sed -E 's/^[[:space:]]*KEYSTORE_BASE64=//' | tr -d ' \r\n\t' | base64 -d > android/app/upload.jks || {
             echo "::error::KEYSTORE_BASE64 n'est pas un base64 valide : recopiez tout le contenu de KEYSTORE_BASE64.txt."; exit 1; }
-          if ! keytool -list -keystore android/app/upload.jks -storepass "$STORE_PASS" -alias "$ALIAS" >/dev/null 2>&1; then
-            echo "::error::Clé de signature illisible : vérifiez KEYSTORE_PASSWORD (uniquement le mot de passe, sans 'KEYSTORE_PASSWORD='), KEY_ALIAS (recufacile) et que KEYSTORE_BASE64 est complet ($(stat -c%s android/app/upload.jks) octets décodés)."
+          # Essaie toutes les combinaisons (secrets inversés entre eux, alias par défaut).
+          OK=""
+          for P in "$STORE_PASS" "$KEY_PASS" "$ALIAS"; do
+            for A in "$ALIAS" recufacile; do
+              if [ -n "$P" ] && keytool -list -keystore android/app/upload.jks -storepass "$P" -alias "$A" >/dev/null 2>&1; then
+                STORE_PASS="$P"; KEY_PASS="$P"; ALIAS="$A"; OK=1; break 2
+              fi
+            done
+          done
+          if [ -z "$OK" ]; then
+            echo "::error::Clé de signature illisible : le mot de passe ne correspond pas. Recopiez dans KEYSTORE_PASSWORD et KEY_PASSWORD uniquement la valeur après le signe = dans autres-secrets.txt."
             exit 1
           fi
           echo "✓ Clé de signature valide (alias $ALIAS)"
