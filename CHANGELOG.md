@@ -2,7 +2,7 @@
 
 ## 1.1.0 — Prêt pour les premiers utilisateurs
 - Page de téléchargement et politique de confidentialité (GitHub Pages).
-- Nouvel écran **Aide & avis** : guide rapide, donner son avis, recommander l'app sur WhatsApp.
+- Nouvel écran **Aide & avis** : guide rapide, avis envoyés directement sur WhatsApp, recommander l'app.
 - Bandeau automatique quand une nouvelle version est disponible.
 - Signature stable de l'APK : les prochaines mises à jour s'installent par-dessus.
 - Fichier AAB généré pour la publication sur le Play Store.

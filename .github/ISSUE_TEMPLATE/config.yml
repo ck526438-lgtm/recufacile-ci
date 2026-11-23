@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: 💬 Support WhatsApp
+    url: https://wa.me/2250787256074
+    about: Écrire directement au support (07 87 25 60 74)
   - name: 🌐 Site et téléchargement
     url: https://ck526438-lgtm.github.io/recufacile-ci/
     about: Télécharger la dernière version de l'application

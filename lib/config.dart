@@ -12,7 +12,7 @@ class AppConfig {
 
   /// Numéro WhatsApp du support au format international sans « + »
   /// (ex. 2250700000000). Vide = les avis passent par GitHub.
-  static const supportWhatsApp = '';
+  static const supportWhatsApp = '2250787256074';
 
   static String get feedbackUrl => supportWhatsApp.isEmpty
       ? issuesUrl
