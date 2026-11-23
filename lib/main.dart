@@ -19,7 +19,7 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   final prefs = await SharedPreferences.getInstance();
   final db = await AppDatabase.open();
-  final state = AppState(db, SecurityService(prefs));
+  final state = AppState(db, SecurityService(prefs), prefs);
   await state.load();
   runApp(ChangeNotifierProvider.value(value: state, child: const RecuFacileApp()));
 }

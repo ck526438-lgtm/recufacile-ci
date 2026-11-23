@@ -15,6 +15,9 @@ sed -i.bak 's/android:label="[^"]*"/android:label="ReçuFacile CI"/' "$MANIFEST"
 grep -q USE_BIOMETRIC "$MANIFEST" || sed -i.bak 's#<application#<uses-permission android:name="android.permission.USE_BIOMETRIC"/>\n    <application#' "$MANIFEST"
 rm -f "$MANIFEST.bak"
 
+# INTERNET, liens https, signature release (si android/key.properties)
+python3 tool/patch_android.py
+
 # local_auth exige FlutterFragmentActivity
 MAIN=$(find android/app/src/main -name 'MainActivity.kt' | head -1)
 if [ -n "$MAIN" ]; then

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../data/app_database.dart';
@@ -10,10 +11,11 @@ import '../services/security_service.dart';
 /// État global : profil, catalogue, et un compteur de révision qui
 /// déclenche le rafraîchissement des écrans après chaque modification.
 class AppState extends ChangeNotifier {
-  AppState(this._db, this.security);
+  AppState(this._db, this.security, this.prefs);
 
   AppDatabase _db;
   final SecurityService security;
+  final SharedPreferences prefs;
 
   AppDatabase get db => _db;
   Merchant? merchant;

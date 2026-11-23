@@ -1,7 +1,7 @@
 name: recufacile_ci
 description: "ReçuFacile CI — reçus numériques gratuits pour commerçants, hors ligne, sans abonnement."
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.1.0+2
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -25,6 +25,7 @@ dependencies:
   crypto: ^3.0.5
   barcode_widget: ^2.0.4
   file_picker: ^8.1.2
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReçuFacile CI — Reçus gratuits pour commerçants</title>
+<meta name="description" content="Créez et partagez des reçus professionnels sur WhatsApp en quelques secondes. Gratuit, sans abonnement, fonctionne sans Internet.">
+<meta property="og:title" content="ReçuFacile CI — Votre commerce, simplement.">
+<meta property="og:description" content="Reçus numériques gratuits pour commerçants : PDF, WhatsApp, Orange Money, Wave, MTN MoMo… 0 FCFA / mois.">
+<meta property="og:image" content="https://ck526438-lgtm.github.io/recufacile-ci/icon.png">
+<meta name="theme-color" content="#1D3FD8">
+<link rel="icon" href="favicon.png">
+<style>
+  :root{--deep:#1D3FD8;--blue:#2563EB;--sky:#1AA0E8;--teal:#0E8C8C;--lime:#D8F35A;--ink:#0B0F1A;--muted:#8A93A6;--bg:#E6E9EE}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(180deg,var(--deep),var(--blue) 60%,#5B8DEF);color:#fff;padding:20px 0 90px;border-radius:0 0 40px 40px;overflow:hidden}
+  nav{display:flex;align-items:center;gap:12px}
+  nav img{width:44px;height:44px;border-radius:13px}
+  nav b{font-size:19px;font-weight:800}
+  nav a.small{margin-left:auto;font-weight:600;text-decoration:none;opacity:.9;font-size:15px}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;margin-top:46px}
+  .tag{display:inline-block;background:var(--lime);color:var(--ink);font-weight:800;font-size:13px;padding:6px 14px;border-radius:20px}
+  h1{font-size:clamp(36px,6vw,62px);line-height:1.02;font-weight:900;letter-spacing:-1.5px;margin:18px 0 16px}
+  .lead{font-size:18px;opacity:.92;max-width:520px}
+  .pill{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.22);border-radius:40px;padding:6px 22px 6px 6px;text-decoration:none;color:#fff;font-weight:700;font-size:17px;max-width:380px;margin-top:30px;transition:transform .15s}
+  .pill:hover{transform:translateY(-2px)}
+  .pill .dot{width:54px;height:54px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:var(--ink);flex:none}
+  .pill .arrows{margin-left:auto;opacity:.6;letter-spacing:-3px;font-size:22px}
+  .sub{font-size:13px;opacity:.8;margin-top:10px}
+  /* Téléphone */
+  .phone{width:300px;margin:0 auto;background:#111;border-radius:44px;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,.35);transform:rotate(-6deg)}
+  .screen{background:linear-gradient(180deg,var(--deep),var(--blue) 70%,#6B95F0);border-radius:34px;padding:18px 16px 16px;position:relative}
+  .screen .bar{display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:700;margin-bottom:14px}
+  .screen .bar span{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:14px}
+  .ticket{background:#fff;color:var(--ink);border-radius:24px;padding:14px;position:relative;
+    -webkit-mask:radial-gradient(circle 10px at 0 34%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 10px at 100% 34%,#0000 98%,#000) right/51% 100% no-repeat;
+            mask:radial-gradient(circle 10px at 0 34%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 10px at 100% 34%,#0000 98%,#000) right/51% 100% no-repeat}
+  .thead{height:78px;border-radius:16px;background:linear-gradient(135deg,#3B5BFF,#22B8F0 45%,#2FD4B4 80%,var(--lime));padding:12px}
+  .thead i{background:var(--ink);color:#fff;font-style:normal;font-size:9px;font-weight:900;letter-spacing:1.4px;padding:3px 6px}
+  .thead b{display:block;font-size:16px;font-weight:900;margin-top:8px}
+  .dash{border-top:1.5px dashed rgba(37,99,235,.6);margin:11px 0}
+  .row{display:flex;justify-content:space-between;font-size:11px}
+  .row small{color:var(--muted);display:block;font-size:9.5px}
+  .total{display:flex;justify-content:space-between;font-weight:900;font-size:15px}
+  .total span:last-child{color:var(--blue)}
+  .barcode{height:34px;margin-top:10px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,#fff 2px 4px,var(--ink) 4px 5px,#fff 5px 8px,var(--ink) 8px 11px,#fff 11px 12px)}
+  .mini{display:flex;align-items:center;gap:8px;margin-top:12px}
+  .mini .b{width:38px;height:38px;border-radius:50%;background:var(--ink)}
+  .mini .p{flex:1;height:44px;border-radius:24px;background:rgba(255,255,255,.22);display:flex;align-items:center;gap:8px;padding:4px;color:#fff;font-size:11px;font-weight:600}
+  .mini .p i{width:36px;height:36px;border-radius:50%;background:var(--lime);display:block}
+  /* Sections */
+  section{padding:70px 0 0}
+  h2{font-size:clamp(28px,4vw,40px);font-weight:900;letter-spacing:-.8px;margin-bottom:8px}
+  .muted{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .card{background:#fff;border-radius:26px;padding:22px}
+  .card .ic{width:48px;height:48px;border-radius:50%;background:#EAF0FF;display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+  .card h3{font-size:17px;font-weight:800;margin-bottom:4px}
+  .card p{color:#4B5366;font-size:14.5px}
+  .price{margin-top:28px;background:linear-gradient(135deg,#3B5BFF,#22B8F0 45%,#2FD4B4 80%,var(--lime));padding:36px 30px;border-radius:26px;position:relative;
+    -webkit-mask:radial-gradient(circle 12px at 0 40%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 40%,#0000 98%,#000) right/51% 100% no-repeat;
+            mask:radial-gradient(circle 12px at 0 40%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 40%,#0000 98%,#000) right/51% 100% no-repeat}
+  .price i{background:var(--ink);color:#fff;font-style:normal;font-weight:900;letter-spacing:1.5px;padding:5px 10px;font-size:13px}
+  .price .big{font-size:clamp(48px,9vw,84px);font-weight:900;letter-spacing:-2px;line-height:1;margin:18px 0 6px}
+  .price hr{border:0;border-top:1.5px solid var(--ink);margin:16px 0}
+  .price ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:6px 20px;font-weight:700}
+  .price li::before{content:"✓  "}
+  .steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+  .step{background:#fff;border-radius:26px;padding:22px}
+  .step::before{counter-increment:s;content:"0" counter(s);display:block;font-size:34px;font-weight:900;color:var(--blue);margin-bottom:6px}
+  .step h3{font-size:17px;font-weight:800}
+  .step p{color:#4B5366;font-size:14.5px}
+  details{background:#fff;border-radius:20px;padding:18px 20px;margin-top:10px}
+  summary{font-weight:700;cursor:pointer}
+  details p{color:#4B5366;margin-top:8px;font-size:15px}
+  .cta{margin:70px 0 0;background:var(--ink);color:#fff;border-radius:30px;padding:40px 30px;text-align:center}
+  .cta .pill{margin:24px auto 0;background:rgba(255,255,255,.12)}
+  footer{padding:40px 0;color:var(--muted);font-size:14px;text-align:center}
+  footer a{margin:0 8px}
+  @media (max-width:820px){
+    .hero{grid-template-columns:1fr}.phone{transform:rotate(-3deg);width:270px;margin-top:20px}
+    .grid,.steps{grid-template-columns:1fr}.price ul{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <img src="icon.png" alt="">
+      <b>ReçuFacile CI</b>
+      <a class="small" href="#installer">Installer</a>
+    </nav>
+    <div class="hero">
+      <div>
+        <span class="tag">0 FCFA / mois · Aucun abonnement</span>
+        <h1>Vos reçus pros en 10 secondes.</h1>
+        <p class="lead">Créez un reçu, envoyez-le en PDF sur WhatsApp et suivez vos recettes du jour. Fait pour les boutiques, salons, maquis, réparateurs et vendeurs du marché.</p>
+        <a class="pill" href="https://github.com/ck526438-lgtm/recufacile-ci/releases/latest/download/RecuFacile-CI.apk">
+          <span class="dot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg></span>
+          Télécharger pour Android
+          <span class="arrows">›››</span>
+        </a>
+        <p class="sub">APK gratuit · fonctionne sans Internet · données gardées sur votre téléphone</p>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="bar"><span>‹</span>Reçu<span>⋯</span></div>
+          <div class="ticket">
+            <div class="thead"><i>REÇU DE VENTE</i><b>MA BOUTIQUE</b></div>
+            <div class="dash"></div>
+            <div class="row"><div><small>Date</small>21/11/2026</div><div style="text-align:right"><small>N°</small>RC-000001</div></div>
+            <div class="dash"></div>
+            <div class="row"><span>Article A × 2</span><span>10 000</span></div>
+            <div class="row" style="margin-top:4px"><span>Article B × 1</span><span>3 000</span></div>
+            <div class="dash"></div>
+            <div class="total"><span>TOTAL</span><span>13 000 FCFA</span></div>
+            <div class="row" style="margin-top:4px"><span class="muted">Paiement</span><span>Wave</span></div>
+            <div class="barcode"></div>
+          </div>
+          <div class="mini"><span class="b"></span><span class="p"><i></i>Partager (WhatsApp…)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Tout ce qu'il faut. Rien à payer.</h2>
+    <p class="muted">Fini le cahier, les calculs à la main et les reçus perdus.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🧾</div><h3>Reçu en quelques gestes</h3><p>Client, produits, quantités, remise : le total se calcule tout seul. Numéro unique RC-000001.</p></div>
+      <div class="card"><div class="ic">💬</div><h3>Envoi WhatsApp</h3><p>Reçu PDF avec votre logo envoyé sur WhatsApp, par Bluetooth ou e-mail. Ou imprimé.</p></div>
+      <div class="card"><div class="ic">📱</div><h3>Mobile Money</h3><p>Espèces, Orange Money, MTN MoMo, Wave, Moov Money, virement : notez comment le client a payé.</p></div>
+      <div class="card"><div class="ic">📊</div><h3>Vos recettes</h3><p>Ventes du jour, de la semaine, du mois et répartition par mode de paiement.</p></div>
+      <div class="card"><div class="ic">📴</div><h3>Sans Internet</h3><p>Créez, enregistrez et retrouvez vos reçus même pendant une coupure réseau.</p></div>
+      <div class="card"><div class="ic">🔒</div><h3>Protégé</h3><p>Code PIN ou empreinte. Vos données restent sur votre téléphone, avec sauvegarde.</p></div>
+    </div>
+    <div class="price">
+      <i>ENGAGEMENT</i>
+      <div class="big">0 FCFA</div>
+      <b style="font-size:20px">par mois, pour toujours</b>
+      <hr>
+      <ul>
+        <li>Aucun abonnement</li><li>Reçus illimités</li>
+        <li>PDF et WhatsApp gratuits</li><li>Statistiques gratuites</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="installer">
+    <h2>Installer en 3 étapes</h2>
+    <p class="muted">L'application n'est pas encore sur le Play Store : on l'installe directement.</p>
+    <div class="steps">
+      <div class="step"><h3>Téléchargez</h3><p>Touchez « Télécharger pour Android » et ouvrez le fichier <b>RecuFacile-CI.apk</b>.</p></div>
+      <div class="step"><h3>Autorisez</h3><p>Si Android le demande, autorisez l'installation depuis votre navigateur (« sources inconnues »).</p></div>
+      <div class="step"><h3>Configurez</h3><p>Entrez le nom de votre boutique et votre numéro : vous êtes prêt à créer votre premier reçu.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Questions fréquentes</h2>
+    <details><summary>Est-ce vraiment gratuit ?</summary><p>Oui. Aucun abonnement, aucune limite de reçus, aucune fonction essentielle payante.</p></details>
+    <details><summary>L'application envoie-t-elle de l'argent ?</summary><p>Non. Elle enregistre seulement le mode de paiement et le montant déclarés. Aucun transfert d'argent.</p></details>
+    <details><summary>Où sont stockés mes reçus ?</summary><p>Uniquement sur votre téléphone. Vous pouvez exporter une sauvegarde (Drive, WhatsApp, e-mail) depuis « Ma boutique ».</p></details>
+    <details><summary>Que se passe-t-il si je change de téléphone ?</summary><p>Exportez une sauvegarde sur l'ancien téléphone, puis utilisez « Restaurer une sauvegarde » sur le nouveau.</p></details>
+    <details><summary>Est-ce sûr d'installer l'APK ?</summary><p>L'application est open source : son code est public sur GitHub et l'APK est construit automatiquement à partir de ce code.</p></details>
+  </section>
+
+  <div class="cta">
+    <h2>Votre commerce, simplement.</h2>
+    <p style="opacity:.8">Rejoignez les premiers commerçants qui testent ReçuFacile CI.</p>
+    <a class="pill" href="https://github.com/ck526438-lgtm/recufacile-ci/releases/latest/download/RecuFacile-CI.apk">
+      <span class="dot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg></span>
+      Télécharger l'APK
+      <span class="arrows">›››</span>
+    </a>
+  </div>
+</main>
+
+<footer class="wrap">
+  © 2026 ReçuFacile CI ·
+  <a href="confidentialite.html">Confidentialité</a> ·
+  <a href="https://github.com/ck526438-lgtm/recufacile-ci/issues/new/choose">Signaler un problème</a> ·
+  <a href="https://github.com/ck526438-lgtm/recufacile-ci">Code source</a>
+</footer>
+</body>
+</html>

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../config.dart';
 import '../models/models.dart';
+import '../services/update_service.dart';
 import '../state/app_state.dart';
 import '../theme/app_theme.dart';
 import '../utils/format.dart';
 import '../widgets/receipt_tile.dart';
 import '../widgets/ticket.dart';
 import 'create_receipt_screen.dart';
+import 'help_screen.dart';
 import 'receipt_screen.dart';
 import 'receipts_screen.dart';
 import 'shop_screen.dart';
@@ -53,12 +56,13 @@ class HomeScreen extends StatelessWidget {
                     ]),
                   ),
                   RoundIconButton(
-                    icon: Icons.storefront_outlined,
+                    icon: Icons.help_outline,
                     size: 46,
-                    tooltip: 'Ma boutique',
-                    onTap: () => _open(context, const ShopScreen()),
+                    tooltip: 'Aide & avis',
+                    onTap: () => _open(context, const HelpScreen()),
                   ),
                 ]),
+                const _UpdateBanner(),
                 const SizedBox(height: 22),
                 _TodayTicket(total: d.todayTotal, count: d.todayCount, currency: m.currency, date: now),
                 const SizedBox(height: 22),
@@ -229,6 +233,57 @@ class _MenuTile extends StatelessWidget {
             Text(label,
                 style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: primary ? Colors.white : AppColors.ink)),
           ]),
+        ),
+      ),
+    );
+  }
+}
+
+/// Bandeau discret affiché quand une nouvelle version est publiée.
+class _UpdateBanner extends StatefulWidget {
+  const _UpdateBanner();
+
+  @override
+  State<_UpdateBanner> createState() => _UpdateBannerState();
+}
+
+class _UpdateBannerState extends State<_UpdateBanner> {
+  String? _version;
+
+  @override
+  void initState() {
+    super.initState();
+    UpdateService.availableUpdate(context.read<AppState>().prefs).then((v) {
+      if (mounted && v != null) setState(() => _version = v);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_version == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 16),
+      child: Material(
+        color: AppColors.ink,
+        borderRadius: BorderRadius.circular(22),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(22),
+          onTap: () => openLink(context, AppConfig.downloadUrl),
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Row(children: [
+              const CircleAvatar(radius: 20, backgroundColor: AppColors.lime, child: Icon(Icons.system_update, color: AppColors.ink)),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text('Nouvelle version $_version disponible — touchez pour la télécharger',
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+              ),
+              IconButton(
+                onPressed: () => setState(() => _version = null),
+                icon: const Icon(Icons.close, color: Colors.white54),
+              ),
+            ]),
+          ),
         ),
       ),
     );

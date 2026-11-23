@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../config.dart';
 import '../services/share_service.dart';
 import '../state/app_state.dart';
 import '../theme/app_theme.dart';
 import '../widgets/ticket.dart';
 import 'catalog_screen.dart';
+import 'help_screen.dart';
 import 'lock_screen.dart';
 import 'onboarding_screen.dart';
 
@@ -139,6 +141,14 @@ class _ShopScreenState extends State<ShopScreen> {
               onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CatalogScreen())),
             ),
           ]),
+          _Section(title: 'Aide', children: [
+            _Tile(
+              icon: Icons.help_outline,
+              title: 'Aide & avis',
+              subtitle: 'Guide, donner mon avis, recommander l\'app',
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const HelpScreen())),
+            ),
+          ]),
           _Section(title: 'Sécurité', children: [
             SwitchListTile(
               secondary: const Icon(Icons.lock_outline, color: AppColors.blue),
@@ -193,7 +203,7 @@ class _ShopScreenState extends State<ShopScreen> {
             ]),
           ),
           const SizedBox(height: 12),
-          const Text('ReçuFacile CI v1.0.0 · L\'application n\'effectue aucun transfert d\'argent.',
+          const Text('ReçuFacile CI v${AppConfig.version} · L\'application n\'effectue aucun transfert d\'argent.',
               textAlign: TextAlign.center, style: TextStyle(color: AppColors.muted, fontSize: 12)),
         ],
       ),

@@ -6,6 +6,13 @@
 <p align="center"><b>Votre commerce, simplement.</b><br>
 Reçus numériques gratuits pour commerçants — <b>0 FCFA / mois, aucun abonnement</b>, fonctionne hors ligne.</p>
 
+<p align="center">
+  <a href="https://github.com/ck526438-lgtm/recufacile-ci/releases/latest/download/RecuFacile-CI.apk"><b>📲 Télécharger l'APK</b></a> ·
+  <a href="https://ck526438-lgtm.github.io/recufacile-ci/">🌐 Site</a> ·
+  <a href="https://github.com/ck526438-lgtm/recufacile-ci/issues/new/choose">💬 Donner son avis</a> ·
+  <a href="https://ck526438-lgtm.github.io/recufacile-ci/confidentialite.html">🔒 Confidentialité</a>
+</p>
+
 ---
 
 ## ✨ Fonctionnalités
@@ -32,12 +39,25 @@ et typographie très grasse.
 
 ## 🚀 Installer l'APK
 
-Chaque push sur `main` construit l'APK via GitHub Actions : onglet **Actions → Build APK → Artifacts**.
-Pour une version publique : créez un tag `v1.0.0`, l'APK est attaché à la **Release**.
+Lien direct, toujours vers la dernière version :
+**https://github.com/ck526438-lgtm/recufacile-ci/releases/latest/download/RecuFacile-CI.apk**
+
+## 📦 Publier une nouvelle version
+
+1. Augmenter `version:` dans `pubspec.yaml` **et** `AppConfig.version` dans `lib/config.dart`.
+2. Ajouter une entrée dans `CHANGELOG.md`, pousser sur `main`.
+3. Créer une release avec le tag `vX.Y.Z` : l'APK et l'AAB y sont ajoutés automatiquement.
+   Les utilisateurs voient un bandeau « Nouvelle version disponible » dans l'app.
+
+### Signature (obligatoire pour les mises à jour)
+Secrets du dépôt (*Settings → Secrets and variables → Actions*) :
+`KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`.
+Sans eux, l'APK est signé avec une clé de debug temporaire. **Gardez une copie du fichier .jks** :
+sans lui, impossible de publier une mise à jour (y compris sur le Play Store).
 
 ## 🛠️ Développement
 
-Prérequis : Flutter 3.29+ et Android SDK.
+Prérequis : Flutter 3.29+, Android SDK et Python 3.
 
 ```bash
 git clone https://github.com/ck526438-lgtm/recufacile-ci.git
